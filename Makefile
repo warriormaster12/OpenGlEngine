@@ -9,7 +9,7 @@ CC = g++
 COMPILER_FLAGS =
 
 #LINKER_FLAGS specifies the libraries we're linking against
-LINKER_FLAGS = -lglfw3 -lGL -lX11 -lpthread -lXrandr -lXi -ldl
+LINKER_FLAGS = -lglfw -lGL -lX11 -lpthread -lXrandr -lXi -ldl
 
 
 #OBJ_NAME specifies the name of our exectuable
