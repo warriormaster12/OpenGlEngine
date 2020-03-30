@@ -39,7 +39,7 @@ public:
         }
         stbi_image_free(data);
     }
-
+    
 };
 
 
