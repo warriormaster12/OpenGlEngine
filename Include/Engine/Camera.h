@@ -1,11 +1,11 @@
 #pragma once
 
 #include<iostream>
-#include "Include/GLES3/gl3.h"
-#include "Include/GLFW/glfw3.h"
-#include "Include/glm/glm.hpp"
-#include "Include/glm/gtc/matrix_transform.hpp"
-#include "Include/glm/gtc/type_ptr.hpp"
+#include "../GLES3/gl3.h"
+#include "../GLFW/glfw3.h"
+#include "../glm/glm.hpp"
+#include "../glm/gtc/matrix_transform.hpp"
+#include "../glm/gtc/type_ptr.hpp"
 
 // camera
 glm::vec3 cameraPos   = glm::vec3(0.0f, 0.0f, 3.0f);
@@ -28,7 +28,8 @@ public:
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
 
-    float cameraSpeed = 2.5 * deltaTime;
+    float cameraSpeed = 5.0;
+    cameraSpeed = cameraSpeed * deltaTime;
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
         cameraPos += cameraSpeed * cameraFront;
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)

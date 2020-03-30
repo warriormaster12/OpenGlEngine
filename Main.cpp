@@ -1,4 +1,3 @@
-
 #include "Include/GLES3/gl3.h"
 #include "Include/GLFW/glfw3.h"
 #include "Include/shader_s.h"
@@ -6,23 +5,12 @@
 #include <cmath>
 #define STB_IMAGE_IMPLEMENTATION
 #include "Include/stb_image.h"
-#include "Camera.h"
+#include "Include/Engine/Camera.h"
+#include "Include/Engine/Initialization.h"
 
-
-
-
-
-
-
-void mouse_callback(GLFWwindow* window, double xpos, double ypos);
-void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
-void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-void processInput(GLFWwindow *window, float deltaTime);
 
 // settings
-const unsigned int SCR_WIDTH = 800;
-const unsigned int SCR_HEIGHT = 600;
-
+Init init_ref;
 Camera camera;
 
 // timing
@@ -31,37 +19,8 @@ float lastFrame = 0.0f;
 
 int main()
 {
-    // glfw: initialize and configure
-    // ------------------------------
-    glfwInit();
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
     
-
-    // glfw window creation
-    // --------------------
-    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "OpenGLEngine", NULL, NULL);
-    if (window == NULL)
-    {
-        std::cout << "Failed to create GLFW window" << std::endl;
-        glfwTerminate();
-        return -1;
-    }
-    glfwMakeContextCurrent(window);
-    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-    glfwSetCursorPosCallback(window, mouse_callback);
-    glfwSetScrollCallback(window, scroll_callback);
-
-    // tell GLFW to capture our mouse
-    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-
-
-    // configure global opengl state
-    // -----------------------------
-    glEnable(GL_DEPTH_TEST);
-
+    init_ref.create_window();
     // build and compile our shader zprogram
     // ------------------------------------
     Shader ourShader("4.1.texture.vs", "4.1.texture.fs");
@@ -206,7 +165,7 @@ int main()
 
     // render loop
     // -----------
-    while (!glfwWindowShouldClose(window))
+    while (!glfwWindowShouldClose(init_ref.window))
     {
         // per-frame time logic
         // --------------------
@@ -216,7 +175,7 @@ int main()
 
         // input
         // -----
-        processInput(window, deltaTime);
+        processInput(init_ref.window, deltaTime);
 
         // render
         // ------
@@ -256,7 +215,7 @@ int main()
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
-        glfwSwapBuffers(window);
+        glfwSwapBuffers(init_ref.window);
         glfwPollEvents();
     }
 
