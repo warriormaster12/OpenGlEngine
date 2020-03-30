@@ -199,7 +199,9 @@ int main()
     ourShader.use();
     ourShader.setInt("texture1", 0);
     ourShader.setInt("texture2", 1);
-   
+
+
+    camera.Camera_Projection(SCR_WIDTH, SCR_HEIGHT, ourShader);
 
 
     // render loop

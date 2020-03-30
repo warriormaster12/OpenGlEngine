@@ -87,4 +87,15 @@ public:
     if (fov >= 120.0f)
         fov = 120.0f;
     }
+
+    void Camera_Projection(const unsigned int SCR_WIDTH, const unsigned int SCR_HEIGHT, Shader ourShader)
+    {
+        // pass projection matrix to shader (note that in this case it could change every frame)
+        glm::mat4 projection = glm::perspective(glm::radians(fov), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+        ourShader.setMat4("projection", projection);
+
+        // camera/view transformation
+        glm::mat4 view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+        ourShader.setMat4("view", view);
+    }
 };

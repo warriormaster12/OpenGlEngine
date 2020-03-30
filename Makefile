@@ -13,7 +13,7 @@ LINKER_FLAGS = -lglfw3 -lGL -lX11 -lpthread -lXrandr -lXi -ldl
 
 
 #OBJ_NAME specifies the name of our exectuable
-OBJ_NAME = Game
+OBJ_NAME = OpenGlEngine
 
 #This is the target that compiles our executable
 all : $(OBJS)
