@@ -1,6 +1,6 @@
 #include "Engine/Initialization.h"
 
-void Init::create_window() {
+InitWindow::InitWindow() {
     // glfw: initialize and configure
     // ------------------------------
     glfwInit();

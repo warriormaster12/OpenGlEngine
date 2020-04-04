@@ -1,8 +1,9 @@
 #include "Engine/CreateObject.h"
 
-void Object::Create_Object(Shader shader, unsigned int VBO, unsigned int VAO) {
-    //TODO: Move this to constructor
-    float vertices[]= {
+
+Object::Object(Shader shader,unsigned int VBO)
+{
+     float vertices[]= {
         -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
          0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
          0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
@@ -44,8 +45,7 @@ void Object::Create_Object(Shader shader, unsigned int VBO, unsigned int VAO) {
          0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
         -0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
         -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
-    };
-
+        };
 
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
@@ -64,7 +64,7 @@ void Object::Create_Object(Shader shader, unsigned int VBO, unsigned int VAO) {
     create_textures(shader);
 }
 
-void Object::Render_Object(Shader shader, unsigned int VBO, unsigned int VAO) {
+void Object::Render_Object(Shader shader, unsigned int VBO) {
     // world space positions of our cubes
     glm::vec3 WorldPos = glm::vec3(0.0f, 0.0f, 0.0f);
     // bind textures on corresponding texture units
@@ -90,7 +90,7 @@ void Object::Render_Object(Shader shader, unsigned int VBO, unsigned int VAO) {
 
 }
 
-void Object::Delete_Object(unsigned int VBO, unsigned int VAO) {
+void Object::Delete_Object(unsigned int VBO) {
     // TODO: Move this to deconstructor
     // optional: de-allocate all resources once they've outlived their purpose:
         // ------------------------------------------------------------------------

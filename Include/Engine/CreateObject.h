@@ -13,14 +13,13 @@
 class Object
 {
 public:     
-    void Create_Object(Shader shader, unsigned int VBO, unsigned int VAO);
+    Object(Shader shader,unsigned int VBO);
+    void Render_Object(Shader shader, unsigned int VBO);
     
-    
-    void Render_Object(Shader shader, unsigned int VBO, unsigned int VAO);
-    
-    void Delete_Object(unsigned int VBO, unsigned int VAO);
+    void Delete_Object(unsigned int VBO);
     
 private: 
     unsigned int texture1, texture2;
-    void create_textures(Shader shader);    
+    void create_textures(Shader shader);  
+    unsigned int VAO;  
 };

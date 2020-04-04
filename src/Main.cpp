@@ -9,9 +9,9 @@
 
 
 // settings
-Init init_ref;
+
 Camera camera;
-Object object_ref;
+
 point_light light_ref;
 
 
@@ -23,7 +23,7 @@ int main()
 {
     camera.SCR_HEIGHT = SCR_HEIGHT;
     camera.SCR_WIDTH = SCR_WIDTH;
-    init_ref.create_window();
+    InitWindow init_ref;
     // build and compile our shader zprogram
     // ------------------------------------
     
@@ -33,8 +33,8 @@ int main()
 
     // set up vertex data (and buffer(s)) and configure vertex attributes
     // ------------------------------------------------------------------
-    unsigned int VBO, VAO;
-    object_ref.Create_Object(ourShader,VBO, VAO);
+    unsigned int VBO;
+    Object object_ref(ourShader, VBO);
     unsigned int LightVAO;
     //light_ref.create_light(LightShader, VBO, LightVAO);
 
@@ -63,7 +63,7 @@ int main()
 
         // render
         // ------
-        glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
+        glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); 
 
         // bind textures on corresponding texture units
@@ -73,7 +73,7 @@ int main()
        
        //light_ref.render_light(LightShader, VBO, LightVAO);
        //camera.Camera_render(LightShader);
-       object_ref.Render_Object(ourShader,VBO, VAO);
+       object_ref.Render_Object(ourShader,VBO);
        camera.Camera_render(ourShader);
        
        
@@ -87,8 +87,8 @@ int main()
         glfwPollEvents();
     }
 
-    object_ref.Delete_Object(VBO, VAO);
-    light_ref.Delete_Object(VBO, LightVAO);
+    object_ref.Delete_Object(VBO);
+    //light_ref.Delete_Object(VBO, LightVAO);
 
     // glfw: terminate, clearing all previously allocated GLFW resources.
     // ------------------------------------------------------------------
@@ -100,7 +100,7 @@ int main()
 // ---------------------------------------------------------------------------------------------------------
 void processInput(GLFWwindow *window, float deltaTime)
 {
-    camera.processInput(window,deltaTime);
+    camera.processInput(window, deltaTime);
 }
 
 // glfw: whenever the window size changed (by OS or user resize) this callback function executes
