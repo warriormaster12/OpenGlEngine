@@ -1,12 +1,12 @@
-#include "Include/GLES3/gl3.h"
-#include "Include/GLFW/glfw3.h"
+#include "GLES3/gl3.h"
+#include "GLFW/glfw3.h"
 #include "../glm/glm.hpp"
 #include "../glm/gtc/matrix_transform.hpp"
 #include "../glm/gtc/type_ptr.hpp"
 #include <iostream>
 #include <cmath>
 #define STB_IMAGE_IMPLEMENTATION
-#include "Include/stb_image.h"
+#include "stb_image.h"
 
 
     
