@@ -6,13 +6,13 @@
 #include "../glm/glm.hpp"
 #include "../glm/gtc/matrix_transform.hpp"
 #include "../glm/gtc/type_ptr.hpp"
-
+#include "../shader_s.h"
 
 
 class Camera
 {
 public:
-
+    unsigned int SCR_WIDTH, SCR_HEIGHT;
     void processInput(GLFWwindow *window, float deltaTime)
     {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
@@ -79,17 +79,7 @@ public:
         fov = 120.0f;
     }
 
-    void Camera_Projection(const unsigned int SCR_WIDTH, const unsigned int SCR_HEIGHT, Shader shader)
-    {
-        // pass projection matrix to shader (note that in this case it could change every frame)
-        glm::mat4 projection = glm::perspective(glm::radians(fov), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-        shader.setMat4("projection", projection);
-
-        // camera/view transformation
-        glm::mat4 view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
-        shader.setMat4("view", view);
-    }
-    void Camera_render(const unsigned int SCR_WIDTH, const unsigned int SCR_HEIGHT,Shader shader)
+    void Camera_render(Shader shader)
     {
          // pass projection matrix to shader (note that in this case it could change every frame)
         glm::mat4 projection = glm::perspective(glm::radians(fov), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
