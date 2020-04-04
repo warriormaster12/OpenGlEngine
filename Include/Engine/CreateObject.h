@@ -12,14 +12,18 @@
 
 class Object
 {
-public:     
-    Object(Shader shader,unsigned int VBO);
-    void Render_Object(Shader shader, unsigned int VBO);
+public:
+    Object();
+    ~Object();
     
-    void Delete_Object(unsigned int VBO);
+    void Render_Object(Shader object_shader);
+    void create_textures(Shader object_shader); 
+
+    // world space positions of our cubes
+    glm::vec3 WorldPos = glm::vec3(0.0f, 0.0f, 0.0f);
+    
     
 private: 
-    unsigned int texture1, texture2;
-    void create_textures(Shader shader);  
-    unsigned int VAO;  
+    unsigned int texture1, texture2; 
+    unsigned int VBO, VAO;  
 };

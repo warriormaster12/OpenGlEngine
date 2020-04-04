@@ -12,7 +12,7 @@
 
 Camera camera;
 
-point_light light_ref;
+
 
 
 // timing
@@ -33,15 +33,15 @@ int main()
 
     // set up vertex data (and buffer(s)) and configure vertex attributes
     // ------------------------------------------------------------------
-    unsigned int VBO;
-    Object object_ref(ourShader, VBO);
-    unsigned int LightVAO;
-    //light_ref.create_light(LightShader, VBO, LightVAO);
-
+    
+    Object object_ref;
+    
+    point_light light_ref;
+    light_ref.WorldPos = glm::vec3(1.0f,2.0f, 3.0f);
 
     // load and create a texture 
     // -------------------------
-   
+    object_ref.create_textures(ourShader);
 
 
     
@@ -71,9 +71,9 @@ int main()
 
         
        
-       //light_ref.render_light(LightShader, VBO, LightVAO);
-       //camera.Camera_render(LightShader);
-       object_ref.Render_Object(ourShader,VBO);
+       light_ref.render_light(LightShader);
+       camera.Camera_render(LightShader);
+       object_ref.Render_Object(ourShader);
        camera.Camera_render(ourShader);
        
        
@@ -87,8 +87,6 @@ int main()
         glfwPollEvents();
     }
 
-    object_ref.Delete_Object(VBO);
-    //light_ref.Delete_Object(VBO, LightVAO);
 
     // glfw: terminate, clearing all previously allocated GLFW resources.
     // ------------------------------------------------------------------

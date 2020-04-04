@@ -15,4 +15,5 @@ class InitWindow {
 public:
     GLFWwindow* window;
     InitWindow();
+    ~InitWindow();
 };

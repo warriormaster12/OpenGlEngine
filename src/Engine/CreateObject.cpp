@@ -1,7 +1,7 @@
 #include "Engine/CreateObject.h"
 
 
-Object::Object(Shader shader,unsigned int VBO)
+Object::Object()
 {
      float vertices[]= {
         -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
@@ -61,12 +61,11 @@ Object::Object(Shader shader,unsigned int VBO)
     // texture coord attribute
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
-    create_textures(shader);
+    
 }
 
-void Object::Render_Object(Shader shader, unsigned int VBO) {
-    // world space positions of our cubes
-    glm::vec3 WorldPos = glm::vec3(0.0f, 0.0f, 0.0f);
+void Object::Render_Object(Shader object_shader) {
+    
     // bind textures on corresponding texture units
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, texture1);
@@ -74,7 +73,7 @@ void Object::Render_Object(Shader shader, unsigned int VBO) {
     glBindTexture(GL_TEXTURE_2D, texture2);
 
     // activate shader
-    shader.use();
+    object_shader.use();
 
      // render boxes
     glBindVertexArray(VAO);
@@ -84,13 +83,13 @@ void Object::Render_Object(Shader shader, unsigned int VBO) {
     glm::mat4 model = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
     model = glm::translate(model, WorldPos);
     model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 0.3f, 0.5f));
-    shader.setMat4("model", model);
+    object_shader.setMat4("model", model);
 
     glDrawArrays(GL_TRIANGLES, 0, 36);
 
 }
 
-void Object::Delete_Object(unsigned int VBO) {
+Object::~Object() {
     // TODO: Move this to deconstructor
     // optional: de-allocate all resources once they've outlived their purpose:
         // ------------------------------------------------------------------------
@@ -99,7 +98,7 @@ void Object::Delete_Object(unsigned int VBO) {
 }
 
 // PRIVATE:
-void Object::create_textures(Shader shader) {
+void Object::create_textures(Shader object_shader) {
 
     glGenTextures(1, &texture1);
     glBindTexture(GL_TEXTURE_2D, texture1); 
@@ -144,7 +143,7 @@ void Object::create_textures(Shader shader) {
 
     // tell opengl for each sampler to which texture unit it belongs to (only has to be done once)
     // -------------------------------------------------------------------------------------------
-    shader.use();
-    shader.setInt("texture1", 0);
-    shader.setInt("texture2", 1);
+    object_shader.use();
+    object_shader.setInt("texture1", 0);
+    object_shader.setInt("texture2", 1);
 }

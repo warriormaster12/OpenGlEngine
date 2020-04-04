@@ -43,3 +43,5 @@ InitWindow::InitWindow() {
     // -----------------------------
     glEnable(GL_DEPTH_TEST);
 }
+InitWindow::~InitWindow()
+{}

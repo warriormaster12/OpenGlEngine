@@ -8,18 +8,17 @@
 #include <iostream>
 #include <cmath>
 #include "shader_s.h"
-#include "Camera.h"
+#include "CreateObject.h"
 
-class point_light
+class point_light : public Object
 {
 public: 
    // lighting
-    glm::vec3 lightPos = glm::vec3(1.2f, 1.0f, 2.0f);
-    void create_light(Shader shader, unsigned int VBO, unsigned int VAO);
-    void render_light(Shader shader, unsigned int VBO, unsigned int VAO);
+    point_light();
+    void render_light(Shader shader);
     
-    void Delete_Object(unsigned int VBO, unsigned int VAO);
+    ~point_light();
     
 private: 
-    Camera camera;
+    unsigned int VBO, VAO;
 };
