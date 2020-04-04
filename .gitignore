@@ -1,3 +1,4 @@
 OpenGlEngine
 .vscode/
 OpenGLEngine.code-workspace
+build/*
