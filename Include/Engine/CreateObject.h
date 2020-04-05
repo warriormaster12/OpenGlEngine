@@ -20,9 +20,12 @@ public:
     
     void Render_Object(Shader object_shader);
     void create_textures(Shader object_shader); 
-    // world space positions of our cubes
+    // world space positions of our cube
     glm::vec3 WorldPos = glm::vec3(0.0f, 0.0f, 0.0f);
+    glm::vec3 lightPos = glm::vec3(1.2f, 1.0f, 2.0f);
     glm::mat4 model;
+
+    float scale = 1.0f;
     
     
 private: 

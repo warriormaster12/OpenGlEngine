@@ -82,11 +82,13 @@ void Object::Render_Object(Shader object_shader) {
     // be sure to activate shader when setting uniforms/drawing objects
     object_shader.setVec3("objectColor", 1.0f, 0.5f, 0.31f);
     object_shader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
-    object_shader.setVec3("lightPos", WorldPos);
+    object_shader.setVec3("lightPos", lightPos);
 
     // world transformation
-    glm::mat4 model = glm::mat4(1.0f);
+    glm::mat4 model = glm::mat4(scale);
     object_shader.setMat4("model", model);
+    //model = glm::translate(model, WorldPos); for now WorldPos won't affect cube's position
+
 
     glDrawArrays(GL_TRIANGLES, 0, 36);
 
