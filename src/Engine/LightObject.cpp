@@ -4,20 +4,15 @@ point_light::point_light()
     Object();
 }
 void point_light::render_light(Shader shader) {
-    // be sure to activate shader when setting uniforms/drawing objects
     shader.use();
-    shader.setVec3("objectColor", 1.0f, 0.5f, 0.31f);
-    shader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
-    shader.setVec3("lightPos", WorldPos);
-    
-
-    // world transformation
-    glm::mat4 model = glm::mat4(1.0f);
+    model = glm::mat4(1.0f);
+    model = glm::translate(model, WorldPos);
+    model = glm::scale(model, glm::vec3(0.2f)); // a smaller cube
     shader.setMat4("model", model);
 
-    // render the cube
     glBindVertexArray(VAO);
     glDrawArrays(GL_TRIANGLES, 0, 36);
+
 }
 
 point_light::~point_light() {

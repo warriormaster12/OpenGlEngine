@@ -29,6 +29,7 @@ int main()
     
     Shader ourShader("assets/4.1.texture.vs", "assets/4.1.texture.fs");
     Shader LightShader("assets/basic_lighting.vs", "assets/basic_lighting.fs");
+    Shader LampShader("assets/lamp.vs", "assets/lamp.fs");
     
 
     // set up vertex data (and buffer(s)) and configure vertex attributes
@@ -37,7 +38,7 @@ int main()
     Object object_ref;
     
     point_light light_ref;
-    light_ref.WorldPos = glm::vec3(1.0f,2.0f, 3.0f);
+    light_ref.WorldPos = glm::vec3(1.0f,2.0f, 2.5f);
 
     // load and create a texture 
     // -------------------------
@@ -63,19 +64,16 @@ int main()
 
         // render
         // ------
-        glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+        glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); 
 
         // bind textures on corresponding texture units
         
 
-        
-       
-       light_ref.render_light(LightShader);
+       light_ref.render_light(LampShader);
+       camera.Camera_render(LampShader); 
+       object_ref.Render_Object(LightShader);
        camera.Camera_render(LightShader);
-       object_ref.Render_Object(ourShader);
-       camera.Camera_render(ourShader);
-       
        
        
 
