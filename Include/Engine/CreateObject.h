@@ -16,7 +16,6 @@ class Object
 public:
     Object();
     ~Object();
-    Camera camera; 
     
     void Render_Object(Shader object_shader);
     void create_textures(Shader object_shader); 

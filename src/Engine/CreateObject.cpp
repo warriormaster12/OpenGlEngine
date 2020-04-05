@@ -74,7 +74,7 @@ void Object::Render_Object(Shader object_shader) {
 
     //activate shader
     object_shader.use();
-
+    
      // render boxes
     glBindVertexArray(VAO);
     
