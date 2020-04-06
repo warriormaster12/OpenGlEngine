@@ -11,6 +11,9 @@ target_include_directories(OpenGlEngine PUBLIC
 
 #OpenGL
 find_package(OpenGL REQUIRED)
+#assimp 
+add_subdirectory(lib/assimp EXCLUDE_FROM_ALL)
+target_link_libraries(OpenGlEngine PRIVATE assimp)
 
 #glfw
 add_subdirectory(lib/glfw EXCLUDE_FROM_ALL)

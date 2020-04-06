@@ -1,5 +1,6 @@
 #include "glad/glad.h"
 #include <GLFW/glfw3.h>
+#include <assimp/mesh.h>
 #include <iostream>
 #include <cmath>
 #include "Engine/Camera.h"
