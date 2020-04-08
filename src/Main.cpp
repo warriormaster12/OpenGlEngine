@@ -1,17 +1,18 @@
-#include "glad/glad.h"
+#include "../Include/glad/glad.h"
 #include <GLFW/glfw3.h>
-#include <assimp/mesh.h>
 #include <iostream>
 #include <cmath>
 #include "Engine/Camera.h"
 #include "Engine/Initialization.h"
 #include "Engine/CreateObject.h"
-#include "Engine/LightObject.h"
+#include "../Include/Models/model.h"
+
 
 
 // settings
 
 Camera camera;
+
 
 
 
@@ -28,22 +29,9 @@ int main()
     // build and compile our shader zprogram
     // ------------------------------------
     
-    Shader ourShader("assets/4.1.texture.vs", "assets/4.1.texture.fs");
-    Shader LightShader("assets/basic_lighting.vs", "assets/basic_lighting.fs");
-    Shader LampShader("assets/lamp.vs", "assets/lamp.fs");
-    
-
-    // set up vertex data (and buffer(s)) and configure vertex attributes
-    // ------------------------------------------------------------------
-    
     Object object_ref;
-    
-    point_light light_ref;
-    light_ref.WorldPos = glm::vec3(1.0f,2.0f, 2.5f);
+    Model ourModel(object_ref.model_directory);
 
-    // load and create a texture 
-    // -------------------------
-    object_ref.create_textures(ourShader);
 
 
     
@@ -65,16 +53,14 @@ int main()
 
         // render
         // ------
-        glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+        glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); 
-
-        // bind textures on corresponding texture units
         
-
-       light_ref.render_light(LampShader);
-       camera.Camera_render(LampShader); 
-       object_ref.Render_Object(LightShader);
-       camera.Camera_render(LightShader);
+        //Render model
+       camera.Camera_render(object_ref.model_shader);
+       object_ref.Render_Object();
+       ourModel.Draw(object_ref.model_shader);
+       
        
        
 
@@ -85,7 +71,6 @@ int main()
         glfwSwapBuffers(init_ref.window);
         glfwPollEvents();
     }
-
 
     // glfw: terminate, clearing all previously allocated GLFW resources.
     // ------------------------------------------------------------------
