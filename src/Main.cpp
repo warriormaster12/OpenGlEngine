@@ -5,7 +5,7 @@
 #include "Engine/Camera.h"
 #include "Engine/Initialization.h"
 #include "Engine/CreateObject.h"
-#include "../Include/Models/model.h"
+#include "Models/model.h"
 
 
 
@@ -33,7 +33,6 @@ int main()
     Model ourModel(object_ref.model_directory);
 
 
-
     
 
 
@@ -53,13 +52,14 @@ int main()
 
         // render
         // ------
-        glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
+        glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); 
         
         //Render model
        camera.Camera_render(object_ref.model_shader);
        object_ref.Render_Object();
        ourModel.Draw(object_ref.model_shader);
+       
        
        
        

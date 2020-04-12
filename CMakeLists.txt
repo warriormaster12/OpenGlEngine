@@ -11,6 +11,7 @@ target_include_directories(OpenGlEngine PUBLIC
 
 #OpenGL
 find_package(OpenGL REQUIRED)
+target_link_libraries(OpenGlEngine PRIVATE ${CMAKE_DL_LIBS})
 #assimp 
 add_subdirectory(lib/assimp EXCLUDE_FROM_ALL)
 target_link_libraries(OpenGlEngine PRIVATE assimp)
