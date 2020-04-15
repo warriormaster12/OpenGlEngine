@@ -7,11 +7,16 @@
 #include "Engine/CreateObject.h"
 #include "Models/model.h"
 
+#include "Engine/ECS.h"
+#include "Engine/Components.h"
+
 
 
 // settings
 
 Camera camera;
+Manager manager;
+auto& newPlayer(manager.addEntity());
 
 
 
@@ -32,7 +37,8 @@ int main()
     Object object_ref;
     Model ourModel(object_ref.model_directory);
 
-
+    newPlayer.addComponent<PositionComponent>();
+    
     
 
 
@@ -60,6 +66,9 @@ int main()
        object_ref.Render_Object();
        ourModel.Draw(object_ref.model_shader);
        
+       manager.update(deltaTime);
+       std::cout << newPlayer.getComponent<PositionComponent>().x() << "," 
+       <<  newPlayer.getComponent<PositionComponent>().y() << std::endl;
        
        
        
