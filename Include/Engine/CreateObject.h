@@ -8,13 +8,14 @@
 #include <iostream>
 #include <cmath>
 #include "../Models/shader.h"
+#include "ECS.h"
 
 
-class Object
+class Object : public Component
 {
 public:
-    Object();
-    void Render_Object();
+    void begin_play() override; 
+    void render() override;
     // world space positions of our object
     glm::vec3 WorldPos = glm::vec3(0.0f, 0.0f, 0.0f);
     glm::vec3 scale = glm::vec3(0.01f,0.01f,0.01f);

@@ -78,15 +78,18 @@ int main()
     // build and compile our shader zprogram
     // ------------------------------------
     
-    Object object_ref;
-    Model ourModel(object_ref.model_directory);
+    
+    
 
     Player.addComponent<Camera>();
     Player.addComponent<Movement>();
+    Player.addComponent<Object>();
 
     Player.getComponent<Camera>().SCR_WIDTH = SCR_WIDTH;
     Player.getComponent<Camera>().SCR_HEIGHT = SCR_HEIGHT;
     Player.getComponent<Movement>().window = window;
+    Model ourModel(Player.getComponent<Object>().model_directory);
+    
     
     glEnable(GL_DEPTH_TEST);
 
@@ -105,13 +108,12 @@ int main()
         // ------
         glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); 
-        
-        //Render model
-       Player.getComponent<Camera>().Camera_render(object_ref.model_shader);
-       object_ref.Render_Object();
-       ourModel.Draw(object_ref.model_shader);
+       manager.update(deltaTime); 
+       manager.render();
+       //Render model
+       Player.getComponent<Camera>().Camera_render(Player.getComponent<Object>().model_shader);
+       ourModel.Draw(Player.getComponent<Object>().model_shader);
        
-       manager.update(deltaTime);
 
        Player.getComponent<Camera>().cameraPos = Player.getComponent<Movement>().Pos;
        Player.getComponent<Camera>().cameraFront = Player.getComponent<Movement>().Front;
@@ -148,7 +150,8 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 // -------------------------------------------------------
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
-    Player.getComponent<Camera>().Process_Mouse_Scroll(yoffset);
+    Player.getComponent<Movement>().Process_Mouse_Scroll(yoffset);
+    Player.getComponent<Camera>().fov = Player.getComponent<Movement>().axis_scale;
 }
 
 void mouse_callback(GLFWwindow* window, double xpos, double ypos)

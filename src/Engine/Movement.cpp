@@ -52,6 +52,14 @@ void Movement::Process_Mouse_Movement(float xpos, float ypos) {
     front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
     Front = glm::normalize(front);
 }
+void Movement::Process_Mouse_Scroll(float yoffset) {
+    if (axis_scale >= 90.0f && axis_scale <= 120.0f)
+        axis_scale -= yoffset;
+    if (axis_scale <= 90.0f)
+        axis_scale = 90.0f;
+    if (axis_scale >= 120.0f)
+        axis_scale = 120.0f;
+}
 
 void Movement::update(double Delta)
 {

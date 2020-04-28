@@ -1,12 +1,12 @@
 #include "../Include/Engine/CreateObject.h"
 
-Object::Object()
+void Object::begin_play()
 {
         WorldPos = glm::vec3(0.0f, -1.75f, 0.0f);
 }
 
 
-void Object::Render_Object()
+void Object::render()
 {
         model_shader.use();
         glm::mat4 model = glm::mat4(1.0f);

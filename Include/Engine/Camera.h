@@ -17,7 +17,6 @@ public:
     void Camera_render(Shader shader);
     // glfw: whenever the mouse scroll wheel scrolls, this callback is called
     // ----------------------------------------------------------------------
-    void Process_Mouse_Scroll(float yoffset);
     // camera
     glm::vec3 cameraPos{ glm::vec3(0.0f, 0.0f, 3.0f) };
     glm::vec3 cameraFront{ glm::vec3(0.0f, 0.0f, -1.0f) };
