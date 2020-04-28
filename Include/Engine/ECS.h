@@ -53,9 +53,11 @@ public:
     void update(double Delta)
     {
         for(auto& c : components) c->update(Delta);
+    }
+    void render() 
+    {
         for (auto& c : components) c-> render();
     }
-    void render() {}
     bool isActive() const {return active;}
     void destroy() {active = false; }
 
