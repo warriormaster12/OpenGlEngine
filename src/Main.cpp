@@ -68,6 +68,9 @@ int main()
     // tell GLFW to capture our mouse
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
+    //enable or disable vsync
+    glfwSwapInterval(0);
+
 
     // configure global opengl state
     // -----------------------------
